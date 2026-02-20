@@ -1,5 +1,10 @@
-tensorflow
-torch
+tensorflow>=2.13.0
+torch>=2.0.0
+torchvision>=0.15.0
 numpy
+matplotlib
+pillow
 pandas
 scikit-learn
+opencv-python
+jupyter
