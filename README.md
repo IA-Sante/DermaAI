@@ -1,33 +1,33 @@
 # DermaAI
 
-## Overview
-DermaAI is an advanced dermatology AI assistance system that leverages machine learning to provide accurate diagnosis and treatment suggestions in the field of dermatology. Our goal is to support healthcare professionals with reliable and efficient tools for enhanced patient care.
+## Présentation
+DermaAI est un système avancé d'assistance en dermatologie basé sur l'intelligence artificielle. Il exploite l'apprentissage automatique pour fournir des diagnostics précis et des suggestions de traitement dans le domaine de la dermatologie. Notre objectif est d'accompagner les professionnels de santé avec des outils fiables et efficaces pour améliorer la prise en charge des patients.
 
-## Setup Instructions
-1. **Clone the repository**
+## Instructions d'installation
+1. **Cloner le dépôt**
    ```bash
    git clone https://github.com/IA-Sante/DermaAI.git
    cd DermaAI
    ```
-2. **Install dependencies**
+2. **Installer les dépendances**
    ```bash
    pip install -r requirements.txt
    ```
-3. **Run the application**
+3. **Lancer l'application**
    ```bash
    python app.py
    ```
 
-## Team Workflow
-- Each team member should create a separate branch for their work and merge it back to the main branch after code review.
-- Regular stand-up meetings to synchronize on development efforts and address any blockers.
-- Utilize GitHub Issues for tracking bugs and feature requests to keep work organized.
+## Flux de travail de l'équipe
+- Chaque membre de l'équipe doit créer une branche séparée pour son travail et la fusionner dans la branche principale après révision du code.
+- Des réunions régulières pour synchroniser les efforts de développement et résoudre les blocages.
+- Utiliser les Issues GitHub pour suivre les bugs et les demandes de fonctionnalités afin de rester organisé.
 
-## Development Guidelines
-- Follow PEP 8 style guidelines for Python code.
-- Write clear and concise commit messages, adhering to the conventional commits format.
-- Include documentation for new features and update existing documentation for modifications.
-- Ensure tests are written for new features or changes to maintain code quality.
+## Directives de développement
+- Respecter les conventions de style PEP 8 pour le code Python.
+- Rédiger des messages de commit clairs et concis, en suivant le format des commits conventionnels.
+- Inclure de la documentation pour les nouvelles fonctionnalités et mettre à jour la documentation existante pour les modifications.
+- S'assurer que des tests sont écrits pour les nouvelles fonctionnalités ou les modifications afin de maintenir la qualité du code.
 
 ## Contribution
-Contributions to the DermaAI project are welcome! Please fork the repository and submit a pull request with your proposed changes. Make sure to follow the workflow and guidelines outlined here.
+Les contributions au projet DermaAI sont les bienvenues ! Veuillez forker le dépôt et soumettre une pull request avec vos modifications proposées. Assurez-vous de suivre le flux de travail et les directives décrits ici.
