@@ -43,7 +43,9 @@ def build_model(num_classes: int = NUM_CLASSES,
     x = layers.GlobalAveragePooling2D(name="gap")(x)
     x = layers.Dense(256, activation="relu", name="fc1")(x)
     x = layers.Dropout(0.3, name="dropout")(x)
-    outputs = layers.Dense(num_classes, activation="softmax", name="predictions")(x)
+    outputs = layers.Dense(
+        num_classes, activation="softmax", name="predictions"
+    )(x)
 
     model = models.Model(inputs, outputs, name="DermaAI_MobileNetV2")
     model.compile(

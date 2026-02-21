@@ -108,7 +108,10 @@ def train(splits_dir: str = "data/splits",
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Entraînement DermaAI (2 phases)")
+    """Point d'entrée CLI pour l'entraînement DermaAI en deux phases."""
+    parser = argparse.ArgumentParser(
+        description="Entraînement DermaAI (2 phases)"
+    )
     parser.add_argument("--splits_dir", default="data/splits")
     parser.add_argument("--models_dir", default="models")
     parser.add_argument("--epochs1", type=int, default=10)

@@ -48,7 +48,8 @@ def load_model(model_path: str = "models/dermai_cnn.h5") -> tf.keras.Model:
     if not os.path.exists(model_path):
         raise FileNotFoundError(
             f"Modèle introuvable : {model_path}\n"
-            "Lancez d'abord src/train.py pour entraîner et sauvegarder le modèle."
+            "Lancez d'abord src/train.py pour entraîner "
+            "et sauvegarder le modèle."
         )
     return tf.keras.models.load_model(model_path)
 
@@ -87,7 +88,8 @@ def predict_image(model: tf.keras.Model,
         - ``predicted_class``  : code court de la classe (ex. ``"mel"``).
         - ``predicted_label``  : nom complet (ex. ``"Melanoma"``).
         - ``confidence``       : probabilité de la classe prédite (float).
-        - ``probabilities``    : dict {classe: probabilité} pour toutes les classes.
+        - ``probabilities``    : dict {classe: probabilité}
+                                pour toutes les classes.
     """
     img_array = preprocess_image(image_input)
     preds = model.predict(img_array, verbose=0)[0]
@@ -130,7 +132,9 @@ def predict_batch(model: tf.keras.Model,
             "predicted_class": predicted_class,
             "predicted_label": CLASS_LABELS[predicted_class],
             "confidence": float(pred[idx]),
-            "probabilities": {cls: float(pred[i]) for i, cls in enumerate(CLASSES)},
+            "probabilities": {
+                cls: float(pred[i]) for i, cls in enumerate(CLASSES)
+            },
         })
     return results
 
@@ -143,11 +147,14 @@ if __name__ == "__main__":
         sys.exit(1)
 
     image_path = sys.argv[1]
-    model_path = sys.argv[2] if len(sys.argv) > 2 else "models/dermai_cnn.h5"
+    _model_path = sys.argv[2] if len(sys.argv) > 2 else "models/dermai_cnn.h5"
 
-    m = load_model(model_path)
+    m = load_model(_model_path)
     result = predict_image(m, image_path)
-    print(f"Classe prédite  : {result['predicted_class']} – {result['predicted_label']}")
+    print(
+        f"Classe prédite  : {result['predicted_class']}"
+        f" – {result['predicted_label']}"
+    )
     print(f"Confiance       : {result['confidence']:.2%}")
     print("Probabilités    :")
     for cls, prob in sorted(result["probabilities"].items(),

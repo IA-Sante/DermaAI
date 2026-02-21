@@ -8,7 +8,6 @@ tf.data.Dataset prêts à l'emploi.
 import os
 from typing import Tuple
 
-import numpy as np
 import pandas as pd
 import tensorflow as tf
 
@@ -47,14 +46,16 @@ def _augment(img: tf.Tensor) -> tf.Tensor:
 # ---------------------------------------------------------------------------
 
 def load_split(csv_path: str, batch_size: int = 32,
-               augment: bool = False, shuffle: bool = False) -> tf.data.Dataset:
+               augment: bool = False,
+               shuffle: bool = False) -> tf.data.Dataset:
     """
     Crée un tf.data.Dataset à partir d'un fichier CSV de split.
 
     Le CSV doit contenir les colonnes ``path`` et ``label``.
 
     Args:
-        csv_path:   Chemin vers le fichier CSV (train.csv / val.csv / test.csv).
+        csv_path:   Chemin vers le fichier CSV
+                    (train.csv / val.csv / test.csv).
         batch_size: Taille des batches.
         augment:    Applique l'augmentation si ``True`` (train seulement).
         shuffle:    Mélange les données si ``True`` (train seulement).
@@ -64,7 +65,7 @@ def load_split(csv_path: str, batch_size: int = 32,
     """
     df = pd.read_csv(csv_path)
     paths = df["path"].tolist()
-    labels = [CLASS_TO_IDX[l] for l in df["label"].tolist()]
+    labels = [CLASS_TO_IDX[lbl] for lbl in df["label"].tolist()]
 
     ds = tf.data.Dataset.from_tensor_slices((paths, labels))
 
@@ -83,10 +84,11 @@ def load_split(csv_path: str, batch_size: int = 32,
     return ds
 
 
+DatasetTuple = Tuple[tf.data.Dataset, tf.data.Dataset, tf.data.Dataset]
+
+
 def get_datasets(splits_dir: str = "data/splits",
-                 batch_size: int = 32) -> Tuple[tf.data.Dataset,
-                                                 tf.data.Dataset,
-                                                 tf.data.Dataset]:
+                 batch_size: int = 32) -> DatasetTuple:
     """
     Retourne les trois datasets (train, val, test).
 
@@ -115,7 +117,7 @@ def get_datasets(splits_dir: str = "data/splits",
 
 
 if __name__ == "__main__":
-    train_ds, val_ds, test_ds = get_datasets()
-    print("Train batches :", len(train_ds))
-    print("Val   batches :", len(val_ds))
-    print("Test  batches :", len(test_ds))
+    _train_ds, _val_ds, _test_ds = get_datasets()
+    print("Train batches :", len(_train_ds))
+    print("Val   batches :", len(_val_ds))
+    print("Test  batches :", len(_test_ds))

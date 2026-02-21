@@ -8,9 +8,7 @@ Usage:
 
 import argparse
 import os
-import shutil
 
-import numpy as np
 import pandas as pd
 from PIL import Image
 from sklearn.model_selection import train_test_split
@@ -20,7 +18,8 @@ CLASSES = ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]
 IMG_SIZE = (224, 224)
 
 
-def resize_and_save(src_path: str, dst_path: str, size: tuple = IMG_SIZE) -> None:
+def resize_and_save(src_path: str, dst_path: str,
+                    size: tuple = IMG_SIZE) -> None:
     """Redimensionne une image et la sauvegarde."""
     os.makedirs(os.path.dirname(dst_path), exist_ok=True)
     img = Image.open(src_path).convert("RGB")
@@ -28,7 +27,8 @@ def resize_and_save(src_path: str, dst_path: str, size: tuple = IMG_SIZE) -> Non
     img.save(dst_path)
 
 
-def preprocess_dataset(raw_dir: str, out_dir: str, metadata_csv: str) -> pd.DataFrame:
+def preprocess_dataset(raw_dir: str, out_dir: str,
+                       metadata_csv: str) -> pd.DataFrame:
     """
     Lit le fichier metadata, redimensionne chaque image et
     l'enregistre dans out_dir/<label>/.
@@ -43,11 +43,14 @@ def preprocess_dataset(raw_dir: str, out_dir: str, metadata_csv: str) -> pd.Data
         image_id = row["image_id"]
         label = row["dx"]
 
-        # Cherche l'image dans raw_dir (peut être réparti sur plusieurs sous-dossiers)
+        # Cherche l'image dans raw_dir
+        # (peut être réparti sur plusieurs sous-dossiers)
         src = None
         for root, _, files in os.walk(raw_dir):
             for fname in files:
-                if fname.startswith(image_id) and fname.lower().endswith((".jpg", ".jpeg", ".png")):
+                valid_ext = (".jpg", ".jpeg", ".png")
+                if (fname.startswith(image_id)
+                        and fname.lower().endswith(valid_ext)):
                     src = os.path.join(root, fname)
                     break
             if src:
@@ -84,10 +87,15 @@ def create_splits(df: pd.DataFrame, splits_dir: str,
     val_df.to_csv(os.path.join(splits_dir, "val.csv"), index=False)
     test_df.to_csv(os.path.join(splits_dir, "test.csv"), index=False)
 
-    print(f"Train : {len(train_df)} | Val : {len(val_df)} | Test : {len(test_df)}")
+    print(
+        f"Train : {len(train_df)} | "
+        f"Val : {len(val_df)} | "
+        f"Test : {len(test_df)}"
+    )
 
 
 def main() -> None:
+    """Point d'entrée CLI pour le prétraitement HAM10000."""
     parser = argparse.ArgumentParser(description="Prétraitement HAM10000")
     parser.add_argument("--raw_dir", default="data/raw")
     parser.add_argument("--out_dir", default="data/processed")
