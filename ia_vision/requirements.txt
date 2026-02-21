@@ -1,5 +1,0 @@
-tensorflow
-torch
-numpy
-pandas
-scikit-learn
